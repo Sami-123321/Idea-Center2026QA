@@ -1,6 +1,6 @@
 
 
-name: name: IdeaCenter
+name: IdeaCenter
 
 on:
   push:
