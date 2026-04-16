@@ -5,32 +5,25 @@ name: IdeaCenter
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
 
 jobs:
   build:
     runs-on: windows-latest
 
     steps:
-      # 1. Checkout
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      # 2. Install SDK
       - name: Install .NET SDK
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 8.0.x
 
-      # 3. Restore
-      - name: Restore packages
-        run: dotnet restore
+      - name: Restore
+        run: dotnet restore ExamPrepIdeaCenter.csproj
 
-      # 4. Build
-      - name: Build solution
-        run: dotnet build --no-restore
+      - name: Build
+        run: dotnet build ExamPrepIdeaCenter.csproj --no-restore
 
-      # 5. Run tests
-      - name: Run tests
-        run: dotnet test --no-build
+      - name: Test
+        run: dotnet test ExamPrepIdeaCenter.csproj --no-build
