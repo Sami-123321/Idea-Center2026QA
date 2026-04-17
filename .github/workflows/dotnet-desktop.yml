@@ -1,29 +1,19 @@
-
-
-name: IdeaCenter
-
+name: Solution-Task-2-Push
 on:
   push:
-    branches: [ "main" ]
-
+   branches: ["master"]
 jobs:
-  build:
-    runs-on: windows-latest
-
+  build-test:
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
-
-      - name: Install .NET SDK
-        uses: actions/setup-dotnet@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 8.0.x
-
-      - name: Restore
-        run: dotnet restore ExamPrepIdeaCenter.csproj
-
+      - name: Restore dependencies
+        run: dotnet restore
       - name: Build
-        run: dotnet build ExamPrepIdeaCenter.csproj --no-restore
-
+        run: dotnet build
       - name: Test
+        run: dotnet test
         run: dotnet test ExamPrepIdeaCenter.csproj --no-build
